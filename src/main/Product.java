@@ -2,18 +2,16 @@ package main;
 
 public class Product {
     private String name;
-    private double price;
+    private float price;
     private int quantity;
 
-    public Product(String name, double price, int quantity){
-        verifyQuantity(quantity);
-        verifyPrice(price);
+    public Product(String name, float price, int quantity){
         this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+        setPrice(price);
+        setQuantity(quantity);
     }
 
-    public void setPrice(double price){
+    public void setPrice(float price){
         verifyPrice(price);
         this.price = price;
     }
@@ -48,13 +46,13 @@ public class Product {
 
     private void verifyQuantity(int quantity){
         if(quantity < 0){
-            throw new IllegalArgumentException("Quantity can't be a negative number");
+           throw new IllegalArgumentException("Quantity can't be a negative number");
         }
     }
 
-    public void verifyBuyQuantity(int quantity){
-        if(this.quantity - quantity < 0 ){
-            throw new RuntimeException("The quantity will become under: " + String.valueOf(this.quantity - quantity));
+    private void verifyBuyQuantity(int quantity){
+        if(this.quantity < quantity ){
+            throw new IllegalArgumentException("The quantity will become under: " + String.valueOf(this.quantity - quantity));
         }
     }
 }
